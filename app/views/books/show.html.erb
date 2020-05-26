@@ -1,0 +1,38 @@
+<html>
+<div class="container">
+  <div class="row">
+ <%= render 'books/list', book: @book, user: @user %>
+</div>
+  <div class="col-xs-9">
+    <table class="table table-hover">
+    <h2>Book detail</h2>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+        <td>
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size:'80x80' %><%= link_to @user.name, user_path(@user.id) %></td>
+        <td><%= link_to @book.title, book_path(@book.id) %></td>
+        <td><%= @book.body %></td>
+        <% if @user.id == current_user.id %>
+        <td><%= link_to "Edit", edit_book_path(@book), class: "col-xs-4 btn btn-xs  btn-success" %></td>
+        <td>
+          <%= link_to "Destroy", book_path, method: :delete, data:
+          { confirm: '本当に削除して良いですか?',
+            cancel: 'やめる',
+            commit: '削除する'}, title: '削除確認', class: "col-xs-4 btn btn-xs btn-danger" %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</html>
