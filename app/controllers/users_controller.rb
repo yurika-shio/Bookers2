@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	# @books = @user.books.page(params[:page]).reverse_order
     @books = @user.books
+    @book_comment = BookComment.new
   end
 
   def update

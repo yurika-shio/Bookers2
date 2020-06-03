@@ -25,14 +25,25 @@
         <% if @user.id == current_user.id %>
         <td><%= link_to "Edit", edit_book_path(@book), class: "col-xs-4 btn btn-xs  btn-success" %></td>
         <td>
-          <%= link_to "Destroy", book_path, method: :delete, data:
+          <%= link_to "Destroy", book_path(@book), method: :delete, data:
           { confirm: '本当に削除して良いですか?',
             cancel: 'やめる',
             commit: '削除する'}, title: '削除確認', class: "col-xs-4 btn btn-xs btn-danger" %></td>
+            <% else %>
+            <% if @book.favorited_by?(current_user) %>
+          <td><%= link_to book_favorites_path(@book), method: :delete do %><span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+            <%= @book.favorites.count %><% end %></td>
+            <% else %>
+          <td><%= link_to book_favorites_path(@book), method: :post do %><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+            <%= @book.favorites.count %><% end %></td><% end %>
+            <td>コメント数：<%= @book.book_comments.count %></td>
             <% end %>
           </tr>
         </tbody>
       </table>
+      <%= render 'book_comments/comment', book: @book, user: @user %>
+    <%= render 'book_comments/form', book: @book, book_comment: @book_comment %>
+
     </div>
   </div>
 </html>

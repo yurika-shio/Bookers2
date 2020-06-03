@@ -1,0 +1,18 @@
+<%= form_for [book, book_comment] do |f| %>
+    <div class="row">
+        <div class="col-sm-12">
+        	<% if book_comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= book_comment.errors.count %>errors prohibited this obj from being saved:</h2>
+          <ul>
+            <% book_comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+        </div>
+    </div>
+    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+<% end %>
