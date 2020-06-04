@@ -1,8 +1,16 @@
 <html>
-<div class="container">
-  <div class="row">
- <%= render 'books/list', book: @book,user: @user %>
-</div>
+<div class="row">
+  <div class="col-xs-3">
+
+    <h2>User info</h2>
+    <%= render 'users/profile', user: @user %>
+    <!--メモ　右側の指定に注意。そこを間違えるとエラーが発生して表示されない -->
+     <%= render 'relationships/follow_button', user: @user %>
+
+    <h2>New book</h2>
+    <%= render 'books/newform', book: @book %>
+
+  </div>
 
 
   <div class="col-xs-9">
